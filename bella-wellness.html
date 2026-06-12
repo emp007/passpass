@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sức Khỏe & Bình An của Bella</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --jade: #4a7c59;
+    --jade-light: #e8f5ec;
+    --lotus: #d4857a;
+    --lotus-light: #fdf0ee;
+    --gold: #c9a84c;
+    --cream: #fdf8f2;
+    --bark: #5c3d2e;
+    --mist: #f2f6f4;
+    --text: #2d3a2e;
+    --soft: #7a8c7b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #2d5a3d 0%, #4a7c59 50%, #6a9e72 100%);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🌿';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.06;
+    top: -30px;
+    left: -20px;
+    transform: rotate(-20deg);
+  }
+  .hero::after {
+    content: '🌸';
+    position: absolute;
+    font-size: 160px;
+    opacity: 0.07;
+    bottom: -20px;
+    right: -10px;
+    transform: rotate(15deg);
+  }
+  .hero-greeting {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 8vw, 64px);
+    color: white;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .hero-tagline {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    max-width: 380px;
+    margin: 0 auto 30px;
+    font-weight: 300;
+  }
+  .today-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    padding: 8px 20px;
+    color: white;
+    font-size: 14px;
+    backdrop-filter: blur(6px);
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    background: white;
+    border-bottom: 2px solid var(--mist);
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 16px 20px;
+    border: none;
+    background: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--soft);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .tab-btn .tab-icon { font-size: 18px; }
+  .tab-btn.active {
+    color: var(--jade);
+    border-bottom-color: var(--jade);
+  }
+  .tab-btn:hover { color: var(--jade); background: var(--jade-light); }
+
+  /* SECTIONS */
+  .section { display: none; padding: 28px 20px 60px; max-width: 600px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--bark);
+    margin-bottom: 6px;
+  }
+  .section-intro {
+    color: var(--soft);
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--jade);
+    transition: transform 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card.lotus { border-left-color: var(--lotus); }
+  .card.gold { border-left-color: var(--gold); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .card-icon { font-size: 28px; }
+  .card-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--bark);
+  }
+  .card p { font-size: 15px; color: #4a5a4b; line-height: 1.65; }
+
+  /* TIP LIST */
+  .tip-list { list-style: none; }
+  .tip-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--mist);
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  .tip-list li:last-child { border-bottom: none; }
+  .tip-list li::before { content: '✦'; color: var(--jade); font-size: 12px; margin-top: 4px; flex-shrink: 0; }
+
+  /* MINDFULNESS TIMER */
+  .breathe-box {
+    background: linear-gradient(135deg, #e8f5ec, #d4f0dd);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .breathe-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--jade), #6aab78);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    transition: transform 4s ease-in-out;
+    box-shadow: 0 0 0 0 rgba(74,124,89,0.4);
+  }
+  .breathe-circle.expand {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 20px rgba(74,124,89,0.1);
+  }
+  .breathe-circle.contract { transform: scale(1); }
+  .breathe-label {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--jade);
+    margin-bottom: 6px;
+  }
+  .breathe-sub { font-size: 14px; color: var(--soft); margin-bottom: 16px; }
+  .btn-primary {
+    background: var(--jade);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #3a6347; }
+  .btn-secondary {
+    background: white;
+    color: var(--jade);
+    border: 2px solid var(--jade);
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--jade-light); }
+
+  /* WORRY LOG */
+  .worry-log {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+  .worry-textarea {
+    width: 100%;
+    border: 1.5px solid #d0e4d4;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+    color: var(--text);
+    background: var(--mist);
+    transition: border 0.2s;
+    margin-bottom: 12px;
+  }
+  .worry-textarea:focus { border-color: var(--jade); background: white; }
+  .worry-entries { margin-top: 16px; }
+  .worry-entry {
+    background: var(--lotus-light);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--bark);
+    position: relative;
+  }
+  .worry-date { font-size: 11px; color: var(--soft); margin-bottom: 4px; }
+  .worry-delete {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--soft);
+    font-size: 16px;
+  }
+
+  /* ENGLISH SECTION */
+  .english-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    text-align: center;
+  }
+  .en-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--bark);
+    margin-bottom: 6px;
+  }
+  .en-vi {
+    font-size: 16px;
+    color: var(--soft);
+    margin-bottom: 16px;
+  }
+  .en-example {
+    background: var(--jade-light);
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 14px;
+    color: var(--jade);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .speak-btn {
+    background: var(--lotus);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background 0.2s;
+  }
+  .speak-btn:hover { background: #c07368; }
+  .lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .lesson-counter { font-size: 13px; color: var(--soft); }
+  .progress-bar {
+    height: 4px;
+    background: var(--mist);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jade), #6aab78);
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+
+  /* NUTRITION */
+  .food-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .food-item {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .food-item:hover { border-color: var(--jade); transform: translateY(-2px); }
+  .food-item.selected { border-color: var(--jade); background: var(--jade-light); }
+  .food-emoji { font-size: 32px; margin-bottom: 6px; }
+  .food-name { font-size: 13px; font-weight: 600; color: var(--bark); }
+  .food-detail {
+    display: none;
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--gold);
+    animation: fadeIn 0.3s ease;
+  }
+  .food-detail.show { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .food-detail h3 { font-family: 'Playfair Display', serif; color: var(--bark); margin-bottom: 8px; }
+  .food-detail p { font-size: 14px; color: #4a5a4b; }
+
+  /* LONGEVITY HABITS */
+  .habit-tracker {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .habit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--mist);
+  }
+  .habit-row:last-child { border-bottom: none; }
+  .habit-info { display: flex; align-items: center; gap: 12px; }
+  .habit-emoji { font-size: 22px; }
+  .habit-name { font-size: 15px; font-weight: 600; color: var(--bark); }
+  .habit-desc { font-size: 12px; color: var(--soft); }
+  .habit-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .habit-check.done { background: var(--jade); border-color: var(--jade); color: white; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    background: var(--jade-light);
+    color: var(--jade);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  /* QUOTE CARD */
+  .quote-card {
+    background: linear-gradient(135deg, var(--bark), #8b5e4a);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .quote-source { font-size: 13px; opacity: 0.6; }
+
+  /* AFFIRMATION */
+  .affirmation-box {
+    background: linear-gradient(135deg, #fdf0ee, #fde8e4);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .affirmation-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--lotus);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 400px) {
+    .food-grid { grid-template-columns: 1fr 1fr; }
+    .en-word { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-greeting">Chào mừng trở lại</div>
+  <div class="hero-name">Bella 🌸</div>
+  <div class="hero-sub">Đoàn Hằng</div>
+  <div class="hero-tagline">Mỗi ngày là một món quà — hãy chăm sóc bản thân thật tốt.</div>
+  <div class="today-pill" id="todayDate">📅 Hôm nay: ...</div>
+</div>
+
+<!-- NAV TABS -->
+<nav class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('longevity', this)">
+    <span class="tab-icon">🌿</span>Sống Lâu
+  </button>
+  <button class="tab-btn" onclick="showTab('nutrition', this)">
+    <span class="tab-icon">🥗</span>Dinh Dưỡng
+  </button>
+  <button class="tab-btn" onclick="showTab('mindfulness', this)">
+    <span class="tab-icon">🧘</span>Thư Giãn
+  </button>
+  <button class="tab-btn" onclick="showTab('worrylog', this)">
+    <span class="tab-icon">📓</span>Nhật Ký
+  </button>
+  <button class="tab-btn" onclick="showTab('english', this)">
+    <span class="tab-icon">🔤</span>Tiếng Anh
+  </button>
+</nav>
+
+<!-- ===== LONGEVITY TAB ===== -->
+<div id="longevity" class="section active">
+  <p class="badge">🌿 Sức Khỏe & Tuổi Thọ</p>
+  <h2 class="section-title">Bí Quyết Sống Lâu Khỏe Mạnh</h2>
+  <p class="section-intro">Những thói quen nhỏ mỗi ngày tạo nên sức khỏe lớn. Bella không cần thay đổi tất cả cùng một lúc — từng bước nhỏ là đủ. 💚</p>
+
+  <div class="habit-tracker">
+    <div style="font-weight:600; color:var(--bark); margin-bottom:4px;">📋 Thói Quen Hôm Nay</div>
+    <div style="font-size:13px; color:var(--soft); margin-bottom:16px;">Nhấn vào vòng tròn khi Bella hoàn thành nhé!</div>
+    <div class="habit-row">
+      <div class="habit-info">
+        <span class="habit-emoji">💧</span>
+        <div><div class="habit-name">Uống 8 ly nước</div><div class="habit-desc">Mỗi ly khoảng 250ml</div></div>
+      </div>
+      <button class="habit-check" onclick="toggleHabit(this)">✓</button>
+    </div>
+    <div class="habit-row">
+      <div class="habit-info">
+        <span class="habit-emoji">🚶</span>
+        <div><div class="habit-name">Đi bộ 20–30 phút</div><div class="habit-desc">Buổi sáng hoặc chiều mát</div></div>
+      </div>
+      <button class="habit-check" onclick="toggleHabit(this)">✓</button>
+    </div>
+    <div class="habit-row">
+      <div class="habit-info">
+        <span class="habit-emoji">😴</span>
+        <div><div class="habit-name">Ngủ 7–8 tiếng</div><div class="habit-desc">Đi ngủ trước 10:30 tối</div></div>
+      </div>
+      <button class="habit-check" onclick="toggleHabit(this)">✓</button>
+    </div>
+    <div class="habit-row">
+      <div class="habit-info">
+        <span class="habit-emoji">🌞</span>
+        <div><div class="habit-name">Ra nắng 15 phút</div><div class="habit-desc">Vitamin D tự nhiên</div></div>
+      </div>
+      <button class="habit-check" onclick="toggleHabit(this)">✓</button>
+    </div>
+    <div class="habit-row">
+      <div class="habit-info">
+        <span class="habit-emoji">😊</span>
+        <div><div class="habit-name">Cười & thư giãn</div><div class="habit-desc">Bớt lo lắng, thêm niềm vui</div></div>
+      </div>
+      <button class="habit-check" onclick="toggleHabit(this)">✓</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-icon">🧠</span><div class="card-title">Giữ Trí Óc Minh Mẫn</div></div>
+    <ul class="tip-list">
+      <li>Đọc sách hoặc xem phim có phụ đề mỗi ngày để não luôn hoạt động</li>
+      <li>Gọi điện nói chuyện với người thân — kết nối xã hội rất quan trọng</li>
+      <li>Học điều mới mỗi tuần, dù nhỏ như một từ tiếng Anh hay một công thức nấu ăn</li>
+      <li>Viết nhật ký giúp giải tỏa lo lắng và rèn trí nhớ</li>
+    </ul>
+  </div>
+
+  <div class="card lotus">
+    <div class="card-header"><span class="card-icon">❤️</span><div class="card-title">Chăm Sóc Tim Mạch</div></div>
+    <ul class="tip-list">
+      <li>Hạn chế muối và thực phẩm chế biến sẵn</li>
+      <li>Ăn nhiều rau xanh, cá và dầu olive</li>
+      <li>Kiểm tra huyết áp định kỳ mỗi 3 tháng</li>
+      <li>Tránh ngồi quá lâu — đứng dậy đi lại mỗi giờ</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-header"><span class="card-icon">🦴</span><div class="card-title">Xương Khớp Chắc Khỏe</div></div>
+    <ul class="tip-list">
+      <li>Uống sữa ít béo hoặc ăn sữa chua mỗi ngày</li>
+      <li>Tập yoga hoặc giãn cơ nhẹ mỗi buổi sáng</li>
+      <li>Bổ sung canxi và vitamin D (hỏi bác sĩ trước)</li>
+      <li>Tránh mang vác nặng sai tư thế</li>
+    </ul>
+  </div>
+
+  <div class="quote-card">
+    <div class="quote-text">"Sức khỏe là tài sản quý giá nhất — không thể mua được bằng tiền."</div>
+    <div class="quote-source">— Câu nói dân gian</div>
+  </div>
+</div>
+
+<!-- ===== NUTRITION TAB ===== -->
+<div id="nutrition" class="section">
+  <p class="badge">🥗 Dinh Dưỡng</p>
+  <h2 class="section-title">Ăn Uống Thông Minh</h2>
+  <p class="section-intro">Nhấn vào từng thực phẩm để xem lợi ích sức khỏe. Những món này dễ tìm ở California!</p>
+
+  <div class="food-grid">
+    <div class="food-item" onclick="showFood('avocado', this)">
+      <div class="food-emoji">🥑</div>
+      <div class="food-name">Bơ (Avocado)</div>
+    </div>
+    <div class="food-item" onclick="showFood('salmon', this)">
+      <div class="food-emoji">🐟</div>
+      <div class="food-name">Cá Hồi</div>
+    </div>
+    <div class="food-item" onclick="showFood('raumuong', this)">
+      <div class="food-emoji">🥬</div>
+      <div class="food-name">Rau Xanh</div>
+    </div>
+    <div class="food-item" onclick="showFood('ginger', this)">
+      <div class="food-emoji">🫚</div>
+      <div class="food-name">Gừng & Nghệ</div>
+    </div>
+    <div class="food-item" onclick="showFood('berries', this)">
+      <div class="food-emoji">🫐</div>
+      <div class="food-name">Việt Quất</div>
+    </div>
+    <div class="food-item" onclick="showFood('tofu', this)">
+      <div class="food-emoji">🧆</div>
+      <div class="food-name">Đậu Phụ</div>
+    </div>
+    <div class="food-item" onclick="showFood('nuts', this)">
+      <div class="food-emoji">🥜</div>
+      <div class="food-name">Các Loại Hạt</div>
+    </div>
+    <div class="food-item" onclick="showFood('water', this)">
+      <div class="food-emoji">🍵</div>
+      <div class="food-name">Trà Xanh</div>
+    </div>
+  </div>
+
+  <div class="food-detail" id="food-avocado">
+    <h3>🥑 Bơ (Avocado)</h3>
+    <p>Rất phổ biến ở California! Giàu chất béo lành mạnh giúp tốt cho tim mạch. Ăn ½ quả mỗi ngày là đủ. Tốt cho da, tóc và giảm cholesterol xấu. Có thể ăn với bánh mì hoặc trộn salad.</p>
+  </div>
+  <div class="food-detail" id="food-salmon">
+    <h3>🐟 Cá Hồi</h3>
+    <p>Nguồn omega-3 tuyệt vời giúp bảo vệ tim và não. Ăn 2–3 lần/tuần. Cá hồi tươi ở California rất ngon và rẻ. Hấp hoặc nướng là tốt nhất — tránh chiên nhiều dầu.</p>
+  </div>
+  <div class="food-detail" id="food-raumuong">
+    <h3>🥬 Rau Xanh</h3>
+    <p>Rau cải, rau muống, bó xôi, cải kale — đều rất tốt! Ăn ít nhất 3 loại rau xanh mỗi ngày. Chứa nhiều vitamin K, sắt, và chất xơ giúp tiêu hóa tốt và xương chắc khỏe.</p>
+  </div>
+  <div class="food-detail" id="food-ginger">
+    <h3>🫚 Gừng & Nghệ</h3>
+    <p>Hai "thần dược" của người Việt! Gừng giúp chống viêm, ấm bụng, giảm buồn nôn. Nghệ chứa curcumin giúp chống oxy hóa, bảo vệ não và gan. Có thể pha trà gừng mật ong uống mỗi sáng.</p>
+  </div>
+  <div class="food-detail" id="food-berries">
+    <h3>🫐 Việt Quất (Blueberry)</h3>
+    <p>Siêu thực phẩm cho não bộ! Chứa chất chống oxy hóa mạnh, giúp cải thiện trí nhớ và tư duy. Ăn một nắm mỗi ngày. Ở California có nhiều — rất tươi và rẻ khi đúng mùa. Có thể ăn với sữa chua.</p>
+  </div>
+  <div class="food-detail" id="food-tofu">
+    <h3>🧆 Đậu Phụ</h3>
+    <p>Nguồn protein thực vật tốt, phù hợp cho người muốn kiểm soát cân nặng. Giàu canxi tốt cho xương. Phụ nữ trên 50 tuổi nên ăn nhiều đậu hũ — chứa isoflavone giúp cân bằng nội tiết tố tự nhiên.</p>
+  </div>
+  <div class="food-detail" id="food-nuts">
+    <h3>🥜 Các Loại Hạt</h3>
+    <p>Hạnh nhân, óc chó, hạt bí, hạt chia — ăn một nắm nhỏ mỗi ngày. Giàu magie, protein và chất béo lành mạnh. Tốt cho tim, não và giúp no lâu. Tránh loại có muối hoặc đường bọc.</p>
+  </div>
+  <div class="food-detail" id="food-water">
+    <h3>🍵 Trà Xanh</h3>
+    <p>Uống 1–2 tách trà xanh mỗi ngày giúp tăng cường hệ miễn dịch, chống oxy hóa và hỗ trợ giảm cân nhẹ. Không nên uống vào buổi tối vì có caffeine nhẹ. Thêm mật ong thay vì đường.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-icon">🍽️</span><div class="card-title">Nguyên Tắc Ăn Uống Hàng Ngày</div></div>
+    <ul class="tip-list">
+      <li>Ăn chậm, nhai kỹ — dạ dày sẽ tiêu hóa tốt hơn và no lâu hơn</li>
+      <li>Ăn 3 bữa đúng giờ, không bỏ bữa sáng</li>
+      <li>Hạn chế cơm trắng — thử đổi sang gạo lứt hoặc quinoa</li>
+      <li>Không ăn quá no, chỉ ăn khoảng 80% no (theo kiểu Nhật: Hara Hachi Bu)</li>
+      <li>Hạn chế đồ ngọt, nước ngọt và đồ chiên rán</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== MINDFULNESS TAB ===== -->
+<div id="mindfulness" class="section">
+  <p class="badge">🧘 Thư Giãn & Tâm Trí</p>
+  <h2 class="section-title">Bình Yên Từ Bên Trong</h2>
+  <p class="section-intro">Khi lo lắng nhiều, cơ thể và tâm trí đều mệt mỏi. Những bài tập nhỏ dưới đây giúp Bella thở nhẹ hơn và bớt lo hơn. 🌸</p>
+
+  <div class="breathe-box">
+    <div class="breathe-circle" id="breatheCircle">🌸</div>
+    <div class="breathe-label" id="breatheLabel">Bắt Đầu Thở</div>
+    <div class="breathe-sub" id="breatheSub">Nhấn nút bên dưới để bắt đầu bài tập thở 4-7-8</div>
+    <button class="btn-primary" id="breatheBtn" onclick="startBreathing()">🌿 Bắt Đầu</button>
+    <button class="btn-secondary" id="stopBtn" style="display:none" onclick="stopBreathing()">Dừng</button>
+  </div>
+
+  <div class="affirmation-box" id="affirmationBox">
+    <div style="font-size:13px; color:var(--soft); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Câu khẳng định hôm nay</div>
+    <div class="affirmation-text" id="affirmationText">Tôi khỏe mạnh, bình an, và đủ sức mạnh để vượt qua mọi lo lắng.</div>
+    <button class="btn-primary" onclick="newAffirmation()" style="font-size:13px; padding:8px 20px;">✨ Câu mới</button>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-icon">🌙</span><div class="card-title">Ngủ Ngon Hơn</div></div>
+    <ul class="tip-list">
+      <li>Tắt điện thoại 1 tiếng trước khi ngủ — ánh sáng xanh khiến não khó ngủ</li>
+      <li>Uống trà hoa cúc (chamomile) hoặc trà gừng ấm trước giờ ngủ</li>
+      <li>Viết ra 3 điều tốt đẹp trong ngày trước khi nhắm mắt</li>
+      <li>Phòng ngủ nên mát, tối và yên tĩnh</li>
+    </ul>
+  </div>
+
+  <div class="card lotus">
+    <div class="card-header"><span class="card-icon">🚶‍♀️</span><div class="card-title">Thiền Đi Bộ Đơn Giản</div></div>
+    <p>Khi đi bộ, hãy thử: <br><br>
+    1. Đi chậm hơn bình thường 20%<br>
+    2. Cảm nhận bàn chân chạm đất<br>
+    3. Hít vào 4 bước — thở ra 4 bước<br>
+    4. Nhìn xung quanh và nhận ra 3 thứ đẹp<br><br>
+    Chỉ 10 phút mỗi ngày giúp giảm lo lắng rõ rệt.</p>
+  </div>
+
+  <div class="card gold">
+    <div class="card-header"><span class="card-icon">📿</span><div class="card-title">Kỹ Thuật 5-4-3-2-1</div></div>
+    <p>Khi lo lắng quá nhiều, hãy nhìn xung quanh và tìm:<br><br>
+    👁️ <b>5 thứ</b> Bella nhìn thấy<br>
+    ✋ <b>4 thứ</b> Bella có thể chạm vào<br>
+    👂 <b>3 âm thanh</b> Bella nghe thấy<br>
+    👃 <b>2 mùi hương</b> Bella ngửi thấy<br>
+    👅 <b>1 thứ</b> Bella nếm được<br><br>
+    Kỹ thuật này đưa tâm trí về hiện tại và giảm lo lắng ngay lập tức.</p>
+  </div>
+</div>
+
+<!-- ===== WORRY LOG TAB ===== -->
+<div id="worrylog" class="section">
+  <p class="badge">📓 Nhật Ký Tâm Tư</p>
+  <h2 class="section-title">Viết Ra Để Nhẹ Lòng</h2>
+  <p class="section-intro">Bella hay lo nhiều và đôi khi hay quên. Hãy viết ra đây — viết xong là bớt nặng lòng hơn, và không lo quên nữa. 💜</p>
+
+  <div class="worry-log">
+    <div style="font-weight:600; color:var(--bark); margin-bottom:12px;">✍️ Hôm nay Bella muốn chia sẻ điều gì?</div>
+    <textarea class="worry-textarea" id="worryInput" rows="4" placeholder="Viết ra điều đang làm Bella lo lắng, hoặc điều tốt đẹp hôm nay..."></textarea>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-primary" onclick="saveEntry('lo lắng')">😟 Lưu Nỗi Lo</button>
+      <button class="btn-primary" style="background:var(--gold);" onclick="saveEntry('biết ơn')">🙏 Lưu Điều Biết Ơn</button>
+      <button class="btn-secondary" onclick="saveEntry('ghi nhớ')">📌 Ghi Nhớ</button>
+    </div>
+  </div>
+
+  <div class="worry-entries" id="worryEntries"></div>
+
+  <div class="card lotus" style="margin-top:8px;">
+    <div class="card-header"><span class="card-icon">💜</span><div class="card-title">Nhắc Nhở Cho Bella</div></div>
+    <ul class="tip-list">
+      <li>Lo lắng là bình thường — nhưng đừng để lo lắng sống thay mình</li>
+      <li>Không thể kiểm soát mọi thứ — chỉ kiểm soát được phản ứng của bản thân</li>
+      <li>Hít thở sâu trước khi đưa ra quyết định bất kỳ</li>
+      <li>Bella đã vượt qua được nhiều khó khăn — lần này cũng sẽ ổn thôi 💚</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== ENGLISH TAB ===== -->
+<div id="english" class="section">
+  <p class="badge">🔤 Học Tiếng Anh</p>
+  <h2 class="section-title">Tiếng Anh Dễ Dàng</h2>
+  <p class="section-intro">Mỗi ngày học 1–2 từ hoặc câu. Nhấn 🔊 để nghe phát âm. Không cần vội — Bella học theo tốc độ của mình. 😊</p>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <div class="english-card">
+    <div style="font-size:12px; color:var(--soft); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px;" id="lessonCategory">Chào Hỏi Hàng Ngày</div>
+    <div class="en-word" id="enWord">Good morning!</div>
+    <div class="en-vi" id="enVi">Chào buổi sáng! 🌞</div>
+    <div class="en-example" id="enExample">"Good morning! How are you today?" — Chào buổi sáng! Hôm nay bạn khỏe không?</div>
+    <div>
+      <button class="speak-btn" onclick="speakWord()">🔊 Nghe</button>
+      <button class="speak-btn" style="background:var(--jade);" onclick="repeatAfter()">🎤 Lặp Lại</button>
+    </div>
+    <div class="lesson-nav">
+      <button class="btn-secondary" onclick="prevLesson()" style="padding:8px 16px; font-size:13px;">← Trước</button>
+      <span class="lesson-counter" id="lessonCounter">1 / 20</span>
+      <button class="btn-primary" onclick="nextLesson()" style="padding:8px 16px; font-size:13px;">Tiếp →</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="card-icon">🏥</span><div class="card-title">Tiếng Anh Ở Phòng Khám</div></div>
+    <ul class="tip-list">
+      <li><b>"I have a headache"</b> — Tôi bị đau đầu</li>
+      <li><b>"My blood pressure is high"</b> — Huyết áp của tôi cao</li>
+      <li><b>"I feel dizzy"</b> — Tôi cảm thấy chóng mặt</li>
+      <li><b>"I need my prescription"</b> — Tôi cần đơn thuốc</li>
+      <li><b>"Can you speak slower?"</b> — Bạn có thể nói chậm hơn không?</li>
+    </ul>
+  </div>
+
+  <div class="card lotus">
+    <div class="card-header"><span class="card-icon">🛒</span><div class="card-title">Tiếng Anh Đi Chợ & Siêu Thị</div></div>
+    <ul class="tip-list">
+      <li><b>"How much is this?"</b> — Cái này bao nhiêu tiền?</li>
+      <li><b>"Is this fresh?"</b> — Cái này có tươi không?</li>
+      <li><b>"Do you have…?"</b> — Bạn có… không?</li>
+      <li><b>"Thank you, have a nice day!"</b> — Cảm ơn, chúc ngày tốt lành!</li>
+      <li><b>"Where is the checkout?"</b> — Quầy tính tiền ở đâu?</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  // DATE
+  const days = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+  const months = ['tháng 1','tháng 2','tháng 3','tháng 4','tháng 5','tháng 6','tháng 7','tháng 8','tháng 9','tháng 10','tháng 11','tháng 12'];
+  const now = new Date();
+  document.getElementById('todayDate').textContent = `📅 ${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+  // TABS
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // HABITS
+  function toggleHabit(btn) {
+    btn.classList.toggle('done');
+    btn.textContent = btn.classList.contains('done') ? '✓' : '✓';
+  }
+
+  // BREATHING
+  let breatheInterval = null;
+  let breathePhase = 0;
+  const phases = [
+    { label: 'Hít Vào...', sub: 'Hít từ từ trong 4 giây', expand: true, duration: 4000 },
+    { label: 'Giữ Hơi...', sub: 'Giữ yên trong 7 giây', expand: true, duration: 7000 },
+    { label: 'Thở Ra...', sub: 'Thở ra từ từ trong 8 giây', expand: false, duration: 8000 },
+  ];
+
+  function startBreathing() {
+    document.getElementById('breatheBtn').style.display = 'none';
+    document.getElementById('stopBtn').style.display = 'inline-block';
+    runPhase();
+  }
+
+  function runPhase() {
+    const p = phases[breathePhase % 3];
+    document.getElementById('breatheLabel').textContent = p.label;
+    document.getElementById('breatheSub').textContent = p.sub;
+    const circle = document.getElementById('breatheCircle');
+    circle.classList.remove('expand', 'contract');
+    void circle.offsetWidth;
+    circle.classList.add(p.expand ? 'expand' : 'contract');
+    breatheInterval = setTimeout(() => {
+      breathePhase++;
+      runPhase();
+    }, p.duration);
+  }
+
+  function stopBreathing() {
+    clearTimeout(breatheInterval);
+    breatheInterval = null;
+    document.getElementById('breatheBtn').style.display = 'inline-block';
+    document.getElementById('stopBtn').style.display = 'none';
+    document.getElementById('breatheLabel').textContent = 'Bắt Đầu Thở';
+    document.getElementById('breatheSub').textContent = 'Nhấn nút bên dưới để bắt đầu bài tập thở 4-7-8';
+    const circle = document.getElementById('breatheCircle');
+    circle.classList.remove('expand', 'contract');
+    breathePhase = 0;
+  }
+
+  // AFFIRMATIONS
+  const affirmations = [
+    'Tôi khỏe mạnh, bình an, và đủ sức mạnh để vượt qua mọi lo lắng.',
+    'Tôi xứng đáng được yêu thương và chăm sóc bản thân mỗi ngày.',
+    'Mỗi ngày tôi đều trở nên tốt hơn — từng bước nhỏ.',
+    'Tôi thả bỏ những gì không thể kiểm soát và tập trung vào hiện tại.',
+    'Cơ thể tôi mạnh mẽ và tôi biết ơn sức khỏe mình có.',
+    'Tôi bình yên. Tôi an toàn. Tôi đủ rồi.',
+    'Lo lắng chỉ là đám mây — trời xanh vẫn còn đó.',
+    'Hôm nay tôi chọn vui vẻ và bình tĩnh.',
+  ];
+  let affIdx = 0;
+  function newAffirmation() {
+    affIdx = (affIdx + 1) % affirmations.length;
+    document.getElementById('affirmationText').textContent = affirmations[affIdx];
+  }
+
+  // FOOD
+  let currentFood = null;
+  function showFood(id, el) {
+    if (currentFood === id) {
+      document.getElementById('food-' + id).classList.remove('show');
+      el.classList.remove('selected');
+      currentFood = null;
+      return;
+    }
+    document.querySelectorAll('.food-detail').forEach(d => d.classList.remove('show'));
+    document.querySelectorAll('.food-item').forEach(i => i.classList.remove('selected'));
+    document.getElementById('food-' + id).classList.add('show');
+    el.classList.add('selected');
+    currentFood = id;
+  }
+
+  // WORRY LOG
+  let entries = JSON.parse(localStorage.getItem('bella_entries') || '[]');
+  function renderEntries() {
+    const container = document.getElementById('worryEntries');
+    container.innerHTML = '';
+    entries.slice().reverse().forEach((e, i) => {
+      const div = document.createElement('div');
+      div.className = 'worry-entry';
+      div.innerHTML = `<div class="worry-date">${e.type === 'lo lắng' ? '😟' : e.type === 'biết ơn' ? '🙏' : '📌'} ${e.type.toUpperCase()} — ${e.date}</div><div>${e.text}</div><button class="worry-delete" onclick="deleteEntry(${entries.length - 1 - i})">✕</button>`;
+      container.appendChild(div);
+    });
+  }
+  function saveEntry(type) {
+    const text = document.getElementById('worryInput').value.trim();
+    if (!text) return;
+    const d = new Date();
+    entries.push({ text, type, date: `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}` });
+    localStorage.setItem('bella_entries', JSON.stringify(entries));
+    document.getElementById('worryInput').value = '';
+    renderEntries();
+  }
+  function deleteEntry(i) {
+    if (confirm('Xóa ghi chú này?')) {
+      entries.splice(i, 1);
+      localStorage.setItem('bella_entries', JSON.stringify(entries));
+      renderEntries();
+    }
+  }
+  renderEntries();
+
+  // ENGLISH LESSONS
+  const lessons = [
+    { cat: 'Chào Hỏi', word: 'Good morning!', vi: 'Chào buổi sáng! 🌞', ex: '"Good morning! How are you?" — Chào buổi sáng! Bạn khỏe không?' },
+    { cat: 'Chào Hỏi', word: 'How are you?', vi: 'Bạn có khỏe không?', ex: '"I\'m fine, thank you!" — Tôi khỏe, cảm ơn!' },
+    { cat: 'Chào Hỏi', word: 'Nice to meet you!', vi: 'Rất vui được gặp bạn!', ex: '"Nice to meet you too!" — Tôi cũng rất vui!' },
+    { cat: 'Chào Hỏi', word: 'Have a nice day!', vi: 'Chúc một ngày tốt lành! ☀️', ex: '"Thank you, you too!" — Cảm ơn, bạn cũng vậy nhé!' },
+    { cat: 'Sức Khỏe', word: 'I feel tired.', vi: 'Tôi cảm thấy mệt.', ex: '"I feel tired today." — Hôm nay tôi cảm thấy mệt.' },
+    { cat: 'Sức Khỏe', word: 'I have a headache.', vi: 'Tôi bị đau đầu. 🤕', ex: '"Doctor, I have a headache." — Bác sĩ ơi, tôi bị đau đầu.' },
+    { cat: 'Sức Khỏe', word: 'I need water.', vi: 'Tôi cần nước. 💧', ex: '"Can I have some water please?" — Cho tôi xin chút nước được không?' },
+    { cat: 'Sức Khỏe', word: 'I feel better!', vi: 'Tôi cảm thấy khỏe hơn rồi! 😊', ex: '"I feel much better today, thank you." — Hôm nay tôi khỏe nhiều hơn, cảm ơn.' },
+    { cat: 'Đi Mua Sắm', word: 'How much is this?', vi: 'Cái này bao nhiêu tiền? 🛒', ex: '"Excuse me, how much is this?" — Xin lỗi, cái này bao nhiêu tiền?' },
+    { cat: 'Đi Mua Sắm', word: 'Too expensive!', vi: 'Đắt quá! 😮', ex: '"That\'s too expensive for me." — Giá đó đắt quá đối với tôi.' },
+    { cat: 'Đi Mua Sắm', word: 'Do you have...?', vi: 'Bạn có... không?', ex: '"Do you have fresh vegetables?" — Bạn có rau tươi không?' },
+    { cat: 'Đi Mua Sắm', word: 'Thank you!', vi: 'Cảm ơn bạn! 🙏', ex: '"Thank you so much!" — Cảm ơn bạn rất nhiều!' },
+    { cat: 'Gia Đình', word: 'My daughter', vi: 'Con gái của tôi 👩', ex: '"My daughter is very kind." — Con gái tôi rất tốt bụng.' },
+    { cat: 'Gia Đình', word: 'I miss you.', vi: 'Tôi nhớ bạn. ❤️', ex: '"I miss you so much!" — Tôi nhớ bạn lắm!' },
+    { cat: 'Gia Đình', word: 'I love you!', vi: 'Tôi yêu bạn! 💕', ex: '"I love you, my family!" — Tôi yêu gia đình tôi!' },
+    { cat: 'Hàng Ngày', word: 'Excuse me.', vi: 'Xin lỗi / Cho hỏi...', ex: '"Excuse me, where is the bathroom?" — Xin lỗi, nhà vệ sinh ở đâu?' },
+    { cat: 'Hàng Ngày', word: 'I don\'t understand.', vi: 'Tôi không hiểu.', ex: '"Sorry, I don\'t understand. Can you repeat?" — Xin lỗi tôi không hiểu. Bạn nói lại được không?' },
+    { cat: 'Hàng Ngày', word: 'Please speak slowly.', vi: 'Hãy nói chậm hơn nhé.', ex: '"Can you speak slowly, please?" — Bạn có thể nói chậm hơn không?' },
+    { cat: 'Hàng Ngày', word: 'Where is...?', vi: 'Ở đâu...? / ... ở đâu vậy?', ex: '"Where is the nearest pharmacy?" — Nhà thuốc gần nhất ở đâu?' },
+    { cat: 'Hàng Ngày', word: 'Yes / No / Maybe', vi: 'Có / Không / Có thể', ex: '"Yes, I understand!" / "No, thank you." / "Maybe tomorrow."' },
+  ];
+
+  let currentLesson = 0;
+
+  function updateLesson() {
+    const l = lessons[currentLesson];
+    document.getElementById('lessonCategory').textContent = l.cat;
+    document.getElementById('enWord').textContent = l.word;
+    document.getElementById('enVi').textContent = l.vi;
+    document.getElementById('enExample').textContent = l.ex;
+    document.getElementById('lessonCounter').textContent = `${currentLesson + 1} / ${lessons.length}`;
+    document.getElementById('progressFill').style.width = `${((currentLesson + 1) / lessons.length) * 100}%`;
+  }
+
+  function nextLesson() {
+    currentLesson = (currentLesson + 1) % lessons.length;
+    updateLesson();
+  }
+
+  function prevLesson() {
+    currentLesson = (currentLesson - 1 + lessons.length) % lessons.length;
+    updateLesson();
+  }
+
+  function speakWord() {
+    if ('speechSynthesis' in window) {
+      const utter = new SpeechSynthesisUtterance(lessons[currentLesson].word);
+      utter.lang = 'en-US';
+      utter.rate = 0.8;
+      speechSynthesis.speak(utter);
+    } else {
+      alert('Trình duyệt của bạn chưa hỗ trợ phát âm. Hãy thử dùng Chrome.');
+    }
+  }
+
+  function repeatAfter() {
+    if ('speechSynthesis' in window) {
+      const utter = new SpeechSynthesisUtterance(lessons[currentLesson].word);
+      utter.lang = 'en-US';
+      utter.rate = 0.65;
+      speechSynthesis.speak(utter);
+    }
+  }
+
+  updateLesson();
+</script>
+</body>
+</html>
